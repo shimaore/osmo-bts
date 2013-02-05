@@ -868,10 +868,8 @@ static int sapi_activate_cb(struct gsm_lchan *lchan, int status)
 	if (lchan->state != LCHAN_S_ACT_REQ)
 		return 0;
 
-	struct gsm_time *time;
 	lchan_set_state(lchan, LCHAN_S_ACTIVE);
-	time = bts_model_get_time(lchan->ts->trx->bts);
-	rsl_tx_chan_act_ack(lchan, time);
+	rsl_tx_chan_act_ack(lchan);
 
 	/* set the initial ciphering parameters for both directions */
 	l1if_set_ciphering(fl1h, lchan, 0);

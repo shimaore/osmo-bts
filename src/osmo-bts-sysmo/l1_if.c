@@ -1303,3 +1303,9 @@ int l1if_close(struct femtol1_hdl *fl1h)
 	l1if_transport_close(MQ_SYS_WRITE, fl1h);
 	return 0;
 }
+
+/* temporary stub to make this patch compile */
+int bts_model_l1sap_down(struct gsm_bts_trx *trx, struct osmo_phsap_prim *l1sap)
+{
+	return -ENOTSUP;
+}

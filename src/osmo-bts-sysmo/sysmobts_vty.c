@@ -444,33 +444,6 @@ void bts_model_config_write_bts(struct vty *vty, struct gsm_bts *bts)
 		vty_out(vty, " auto-band%s", VTY_NEWLINE);
 }
 
-/* FIXME: move to libosmocore ? */
-static char buf_casecnvt[256];
-char *osmo_str_tolower(const char *in)
-{
-	int len, i;
-
-	if (!in)
-		return NULL;
-
-	len = strlen(in);
-	if (len > sizeof(buf_casecnvt))
-		len = sizeof(buf_casecnvt);
-
-	for (i = 0; i < len; i++) {
-		buf_casecnvt[i] = tolower(in[i]);
-		if (in[i] == '\0')
-			break;
-	}
-	if (i < sizeof(buf_casecnvt))
-		buf_casecnvt[i] = '\0';
-
-	/* just to make sure we're always zero-terminated */
-	buf_casecnvt[sizeof(buf_casecnvt)-1] = '\0';
-
-	return buf_casecnvt;
-}
-
 void bts_model_config_write_trx(struct vty *vty, struct gsm_bts_trx *trx)
 {
 	struct femtol1_hdl *fl1h = trx_femtol1_hdl(trx);

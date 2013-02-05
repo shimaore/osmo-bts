@@ -27,5 +27,7 @@ int lchan_init_lapdm(struct gsm_lchan *lchan);
 
 void load_timer_start(struct gsm_bts *bts);
 
+struct gsm_time *get_time(struct gsm_bts *bts);
+
 #endif /* _BTS_H */
 

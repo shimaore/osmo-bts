@@ -255,7 +255,7 @@ int main(int argc, char **argv)
 	bts_log_init(NULL);
 
 	vty_init(&bts_vty_info);
-	bts_vty_init(&bts_log_info);
+	bts_vty_init(bts, &bts_log_info);
 
 	handle_options(argc, argv);
 

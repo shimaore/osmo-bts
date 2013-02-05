@@ -69,8 +69,8 @@ static struct log_info_cat bts_log_info_cat[] = {
 	[DL1C] = {
 		.name = "DL1C",
 		.description = "Layer 1",
-		.loglevel = LOGL_INFO,
-		.enabled = 1,
+		.color = "\033[1;32m",
+		.enabled = 1, .loglevel = LOGL_NOTICE,
 	},
 	[DL1P] = {
 		.name = "DL1P",

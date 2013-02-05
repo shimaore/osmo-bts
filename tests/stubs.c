@@ -46,3 +46,6 @@ int l1if_pdch_req(struct gsm_bts_trx_ts *ts, int is_ptcch, uint32_t fn,
 
 uint32_t trx_get_hlayer1(struct gsm_bts_trx *trx)
 { return 0; }
+
+int bts_model_l1sap_down(struct gsm_bts_trx *trx, struct osmo_phsap_prim *l1sap)
+{ return 0; }

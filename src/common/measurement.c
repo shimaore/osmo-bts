@@ -89,6 +89,11 @@ static int is_meas_complete(enum gsm_phys_chan_config pchan, unsigned int ts,
 /* receive a L1 uplink measurement from L1 */
 int lchan_new_ul_meas(struct gsm_lchan *lchan, struct bts_ul_meas *ulm)
 {
+	/* in the GPRS case we are not interested in measurement
+	 * processing.  The PCU will take care of it */
+	if (lchan->type == GSM_LCHAN_PDTCH)
+		return 0;
+
 	DEBUGP(DMEAS, "%s adding measurement, num_ul_meas=%d\n",
 		gsm_lchan_name(lchan), lchan->meas.num_ul_meas);
 
