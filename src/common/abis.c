@@ -42,6 +42,7 @@
 #include <osmo-bts/bts.h>
 #include <osmo-bts/rsl.h>
 #include <osmo-bts/oml.h>
+#include <osmo-bts/bts_model.h>
 
 extern uint8_t abis_mac[6];
 
@@ -516,13 +517,5 @@ void abis_close(struct ipabis_link *link)
 	if (osmo_timer_pending(&link->timer))
 		osmo_timer_del(&link->timer);
 
-	/* for now, we simply terminate the program and re-spawn */
-	if (link->bts)
-		bts_shutdown(link->bts, "Abis close / OML");
-	else if (link->trx)
-		bts_shutdown(link->trx->bts, "Abis close / RSL");
-	else {
-		LOGP(DABIS, LOGL_FATAL, "Unable to connect to BSC\n");
-		exit(43);
-	}
+	bts_model_abis_close(link);
 }

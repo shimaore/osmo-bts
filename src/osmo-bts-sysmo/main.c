@@ -352,3 +352,16 @@ int main(int argc, char **argv)
 		osmo_select_main(0);
 	}
 }
+
+void bts_model_abis_close(struct ipabis_link *link)
+{
+	/* for now, we simply terminate the program and re-spawn */
+	if (link->bts)
+		bts_shutdown(link->bts, "Abis close / OML");
+	else if (link->trx)
+		bts_shutdown(link->trx->bts, "Abis close / RSL");
+	else {
+		LOGP(DABIS, LOGL_FATAL, "Unable to connect to BSC\n");
+		exit(43);
+	}
+}

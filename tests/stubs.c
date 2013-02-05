@@ -49,3 +49,6 @@ uint32_t trx_get_hlayer1(struct gsm_bts_trx *trx)
 
 int bts_model_l1sap_down(struct gsm_bts_trx *trx, struct osmo_phsap_prim *l1sap)
 { return 0; }
+
+void bts_model_abis_close(struct ipabis_link *link)
+{ }
