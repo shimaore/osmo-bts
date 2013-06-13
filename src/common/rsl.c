@@ -807,9 +807,8 @@ static int rsl_rx_rf_chan_rel(struct gsm_lchan *lchan, uint8_t chan_nr)
 		msgb_queue_flush(&lchan->dl_tch_queue);
 	}
 
-	/* deactivate handover RACH detection and timer */
-	lchan->ho.active = HANDOVER_NONE;
-	osmo_timer_del(&lchan->ho.t3105);
+	/* release handover starte */
+	reset_handover(lchan);
 
 	l1sap_chan_rel(lchan->ts->trx, chan_nr);
 
