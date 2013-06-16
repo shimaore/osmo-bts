@@ -45,6 +45,7 @@
 #include <osmo-bts/vty.h>
 #include <osmo-bts/bts_model.h>
 #include <osmo-bts/pcu_if.h>
+#include <osmo-bts/l1sap.h>
 
 #define SYSMOBTS_RF_LOCK_PATH	"/var/lock/bts_rf_lock"
 
@@ -254,6 +255,7 @@ int main(int argc, char **argv)
 
 	bts_log_init(NULL);
 
+	bts = gsm_bts_alloc(tall_bts_ctx);
 	vty_init(&bts_vty_info);
 	bts_vty_init(bts, &bts_log_info);
 
@@ -271,7 +273,6 @@ int main(int argc, char **argv)
 		}
 	}
 
-	bts = gsm_bts_alloc(tall_bts_ctx);
 	if (bts_init(bts) < 0) {
 		fprintf(stderr, "unable to to open bts\n");
 		exit(1);
