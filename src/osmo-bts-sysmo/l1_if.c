@@ -442,14 +442,17 @@ int bts_model_l1sap_down(struct gsm_bts_trx *trx, struct osmo_phsap_prim *l1sap)
 			u8Tn = L1SAP_CHAN2TS(chan_nr);
 			ss = l1sap_chan2ss(chan_nr);
 			lchan = &trx->ts[u8Tn].lchan[ss];
-			if (l1sap->u.info.u.ciph_req.downlink) {
+			if (l1sap->u.info.u.ciph_req.uplink) {
 				l1if_set_ciphering(fl1, lchan, 1);
 				lchan->ciph_state = LCHAN_CIPH_RX_REQ;
 			}
-			if (l1sap->u.info.u.ciph_req.uplink) {
+			if (l1sap->u.info.u.ciph_req.downlink) {
 				l1if_set_ciphering(fl1, lchan, 0);
-				lchan->ciph_state = LCHAN_CIPH_TXRX_REQ;
+				lchan->ciph_state = LCHAN_CIPH_RX_CONF_TX_REQ;
 			}
+			if (l1sap->u.info.u.ciph_req.downlink
+			 && l1sap->u.info.u.ciph_req.uplink)
+				lchan->ciph_state = LCHAN_CIPH_RXTX_REQ;
 			break;
 		case PRIM_INFO_ACTIVATE:
 		case PRIM_INFO_DEACTIVATE:

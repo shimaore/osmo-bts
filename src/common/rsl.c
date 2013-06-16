@@ -890,7 +890,6 @@ static int rsl_rx_encr_cmd(struct msgb *msg)
 	/* push a fake RLL DATA REQ header */
 	rsl_rll_push_l3(msg, RSL_MT_DATA_REQ, dch->chan_nr, link_id, 1);
 
-
 #ifdef FAKE_CIPH_MODE_COMPL
 	if (lchan->encr.alg_id != RSL_ENC_ALG_A5(0)) {
 		struct ciph_mod_compl *cmc;
