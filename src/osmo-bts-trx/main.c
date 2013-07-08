@@ -420,6 +420,3 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-void bts_model_abis_close(struct ipabis_link *link)
-{
-}

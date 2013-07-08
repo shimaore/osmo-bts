@@ -34,6 +34,7 @@
 #include <osmo-bts/l1sap.h>
 #include <osmo-bts/amr.h>
 #include <osmo-bts/handover.h>
+#include <osmo-bts/abis.h>
 
 #include "l1_if.h"
 #include "trx_if.h"
@@ -277,6 +278,13 @@ int bts_model_trx_close(struct gsm_bts_trx *trx)
 	check_transceiver_availability_trx(l1h, 0);
 
 	return 0;
+}
+
+/* on RSL failure, deactivate transceiver */
+void bts_model_abis_close(struct ipabis_link *link)
+{
+	if (link->trx)
+		bts_model_trx_close(link->trx);
 }
 
 /* set bts attributes */
