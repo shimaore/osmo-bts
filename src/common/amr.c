@@ -14,11 +14,13 @@ void amr_log_mr_conf(int ss, int logl, const char *pfx,
 	LOGP(ss, logl, "%s AMR MR Conf: num_modes=%u",
 		pfx, amr_mrc->num_modes);
 
+#if 0
 	for (i = 0; i < amr_mrc->num_modes; i++)
 		LOGPC(ss, logl, ", mode[%u] = %u/%u/%u",
 			i, amr_mrc->mode[i].mode,
 			amr_mrc->mode[i].threshold_bts,
 			amr_mrc->mode[i].hysteresis_bts);
+#endif
 	LOGPC(ss, logl, "\n");
 }
 
@@ -68,6 +70,7 @@ int amr_parse_mr_conf(struct amr_multirate_conf *amr_mrc,
 		}
 	}
 
+#if 0
 	if (num_codecs >= 2) {
 		amr_mrc->mode[0].threshold_bts = mr_conf[1] & 0x3F;
 		amr_mrc->mode[0].hysteresis_bts = mr_conf[2] >> 4;
@@ -82,6 +85,7 @@ int amr_parse_mr_conf(struct amr_multirate_conf *amr_mrc,
 			((mr_conf[3] & 0x3) << 4) | (mr_conf[4] >> 4);
 		amr_mrc->mode[2].hysteresis_bts = mr_conf[4] & 0xF;
 	}
+#endif
 
 	return num_codecs;
 

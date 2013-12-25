@@ -776,6 +776,7 @@ static int rsl_rx_chan_activ(struct msgb *msg)
 	}
 	/* 9.3.52 MultiRate Configuration */
 	if (TLVP_PRESENT(&tp, RSL_IE_MR_CONFIG)) {
+#if 0
 		if (TLVP_LEN(&tp, RSL_IE_MR_CONFIG) > sizeof(lchan->mr_bts_lv) - 1) {
 			LOGP(DRSL, LOGL_ERROR, "Error parsing MultiRate conf IE\n");
 			return rsl_tx_error_report(msg->trx, RSL_ERR_IE_CONTENT);
@@ -786,6 +787,7 @@ static int rsl_rx_chan_activ(struct msgb *msg)
 				  TLVP_LEN(&tp, RSL_IE_MR_CONFIG));
 		amr_log_mr_conf(DRTP, LOGL_DEBUG, gsm_lchan_name(lchan),
 				&lchan->tch.amr_mr);
+#endif
 	}
 	/* 9.3.53 MultiRate Control */
 	/* 9.3.54 Supported Codec Types */
@@ -1025,6 +1027,7 @@ static int rsl_rx_mode_modif(struct msgb *msg)
 
 	/* 9.3.52 MultiRate Configuration */
 	if (TLVP_PRESENT(&tp, RSL_IE_MR_CONFIG)) {
+#if 0
 		if (TLVP_LEN(&tp, RSL_IE_MR_CONFIG) > sizeof(lchan->mr_bts_lv) - 1) {
 			LOGP(DRSL, LOGL_ERROR, "Error parsing MultiRate conf IE\n");
 			return rsl_tx_error_report(msg->trx, RSL_ERR_IE_CONTENT);
@@ -1035,6 +1038,7 @@ static int rsl_rx_mode_modif(struct msgb *msg)
 				  TLVP_LEN(&tp, RSL_IE_MR_CONFIG));
 		amr_log_mr_conf(DRTP, LOGL_DEBUG, gsm_lchan_name(lchan),
 				&lchan->tch.amr_mr);
+#endif
 	}
 	/* 9.3.53 MultiRate Control */
 	/* 9.3.54 Supported Codec Types */
@@ -1262,6 +1266,7 @@ static char *get_rsl_local_ip(struct gsm_bts_trx *trx)
 	static char hostbuf[256];
 	int rc;
 
+#if 0
 	rc = getsockname(trx->rsl_link->bfd.fd, (struct sockaddr *) &ss,
 			 &sa_len);
 	if (rc < 0)
@@ -1272,6 +1277,8 @@ static char *get_rsl_local_ip(struct gsm_bts_trx *trx)
 			 NI_NUMERICHOST);
 	if (rc < 0)
 		return NULL;
+#endif
+  memcpy(hostbuf,"unknown",8);
 
 	return hostbuf;
 }
@@ -1391,6 +1398,7 @@ static int rsl_rx_ipac_XXcx(struct msgb *msg)
 	if (connect_ip && connect_port) {
 		struct in_addr ia;
 
+#if 0
 		/* Special rule: If connect_ip == 0.0.0.0, use RSL IP
 		 * address */
 		if (connect_ip == 0) {
@@ -1398,6 +1406,7 @@ static int rsl_rx_ipac_XXcx(struct msgb *msg)
 				lchan->ts->trx->rsl_link;
 			ia.s_addr = htonl(link->ip);
 		} else
+#endif
 			ia.s_addr = connect_ip;
 		rc = osmo_rtp_socket_connect(lchan->abis_ip.rtp_socket,
 					     inet_ntoa(ia), ntohs(connect_port));

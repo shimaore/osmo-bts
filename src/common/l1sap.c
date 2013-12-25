@@ -43,6 +43,7 @@
 #include <osmo-bts/measurement.h>
 #include <osmo-bts/bts.h>
 #include <osmo-bts/rsl.h>
+#include <osmo-bts/abis.h>
 #include <osmo-bts/bts_model.h>
 #include <osmo-bts/handover.h>
 

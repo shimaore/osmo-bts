@@ -290,6 +290,7 @@ int trx_loop_amr_input(struct trx_l1h *l1h, uint8_t chan_nr,
 	/* degrade */
 	if (chan_state->dl_cmr > 0) {
 		/* degrade, if ber is above threshold FIXME: C/I */
+#if 0
 		if (ber >
 		   lchan->tch.amr_mr.mode[chan_state->dl_cmr-1].threshold_bts) {
 			LOGP(DLOOP, LOGL_DEBUG, "Degrading due to BER %.6f "
@@ -298,6 +299,7 @@ int trx_loop_amr_input(struct trx_l1h *l1h, uint8_t chan_nr,
 				chan_state->dl_cmr - 1, l1h->trx->nr, chan_nr);
 			chan_state->dl_cmr--;
 		}
+#endif
 
 		return 0;
 	}
@@ -305,6 +307,7 @@ int trx_loop_amr_input(struct trx_l1h *l1h, uint8_t chan_nr,
 	/* upgrade */
 	if (chan_state->dl_cmr < chan_state->codecs - 1) {
 		/* degrade, if ber is above threshold  FIXME: C/I*/
+#if 0
 		if (ber <
 		    lchan->tch.amr_mr.mode[chan_state->dl_cmr].threshold_bts
 		  - lchan->tch.amr_mr.mode[chan_state->dl_cmr].hysteresis_bts) {
@@ -314,6 +317,7 @@ int trx_loop_amr_input(struct trx_l1h *l1h, uint8_t chan_nr,
 				chan_state->dl_cmr + 1, l1h->trx->nr, chan_nr);
 			chan_state->dl_cmr++;
 		}
+#endif
 
 		return 0;
 	}
